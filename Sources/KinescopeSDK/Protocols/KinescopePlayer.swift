@@ -56,4 +56,8 @@ public protocol KinescopePlayer {
     ///  - Parameters:
     ///     - options: Array of options to ignore.
     func disableOptions(_ options: [KinescopePlayerOption])
+    
+    /// Seeks the player to the given time (in seconds)
+    /// - Parameter seconds: Time to seek to, in seconds
+    func seekTo(seconds: TimeInterval)
 }

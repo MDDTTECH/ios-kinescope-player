@@ -62,7 +62,8 @@ final class PlayerOverlayView: UIControl {
 
 extension PlayerOverlayView: PlayerOverlayInput {
     func set(title: String, subtitle: String) {
-        nameView.set(title: title, subtitle: subtitle)
+        // Skip
+        // nameView.set(title: title, subtitle: subtitle)
     }
 
     func set(playing: Bool) {

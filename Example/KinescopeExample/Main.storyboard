@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jZb-0J-pra">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jZb-0J-pra">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -47,7 +47,7 @@
                                     <action selector="didTapPlay:" destination="8D4-Vc-teG" eventType="touchUpInside" id="294-NJ-Nxf"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" toolTip="UIenabled" on="YES" title="UIEnabled" translatesAutoresizingMaskIntoConstraints="NO" id="UvK-HX-Vij">
+                            <switch toolTip="UIenabled" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" title="UIEnabled" translatesAutoresizingMaskIntoConstraints="NO" id="UvK-HX-Vij">
                                 <rect key="frame" x="333" y="119" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player UI Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBg-RZ-G5U">
@@ -97,6 +97,16 @@
                                     <constraint firstAttribute="height" constant="400" id="C1n-q6-hl7"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rW-3B-JKY">
+                                <rect key="frame" x="144" y="685" width="126" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.3803921569" green="0.3803921569" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Seek To Start"/>
+                                <connections>
+                                    <action selector="didTapSeekToStart:" destination="DPB-hC-LdC" eventType="touchUpInside" id="ulH-ZH-gDM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GgO-Ol-gXU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -109,6 +119,7 @@
                     <navigationItem key="navigationItem" id="Quj-GN-m8L"/>
                     <connections>
                         <outlet property="playerView" destination="0Mt-Oj-buA" id="EkF-2Z-qNh"/>
+                        <outlet property="seekToStartButton" destination="2rW-3B-JKY" id="5Ty-P4-bDX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C0p-yZ-n2A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -12,6 +12,7 @@ final class VideoViewController: UIViewController {
     // MARK: - IBOutlets
 
     @IBOutlet private weak var playerView: KinescopePlayerView!
+    @IBOutlet private weak var seekToStartButton: UIButton!
 
     // MARK: - Private properties
 
@@ -74,6 +75,10 @@ final class VideoViewController: UIViewController {
         player?.play()
         player?.pipDelegate = PipManager.shared
 
+    }
+    
+    @IBAction func didTapSeekToStart(_ sender: Any) {
+        player?.seekTo(seconds: .zero)
     }
 
 }

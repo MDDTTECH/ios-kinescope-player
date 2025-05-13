@@ -225,6 +225,10 @@ public class KinescopeVideoPlayer: KinescopePlayer, KinescopePlayerBody, Fullscr
     public func disableOptions(_ options: [KinescopePlayerOption]) {
         disabledOptions = options
     }
+    
+    public func seekTo(seconds: TimeInterval) {
+        seek(to: seconds)
+    }
 }
 
 // MARK: - Private
