@@ -229,6 +229,30 @@ public class KinescopeVideoPlayer: KinescopePlayer, KinescopePlayerBody, Fullscr
     public func seekTo(seconds: TimeInterval) {
         seek(to: seconds)
     }
+    
+    public func dispose() {
+        strategy.pause()
+        
+        view?.playerView.player = nil
+        
+        if let view = view {
+            detach(view: view)
+        }
+        
+        strategy.player.replaceCurrentItem(with: nil)
+
+        if let observer = playbackObserver {
+            strategy.player.removeTimeObserver(observer)
+            playbackObserver = nil
+        }
+
+        kvoBag.removeAll()
+        notificationsBag.removeAll()
+
+        self.view = nil
+
+        delegate = nil
+    }
 }
 
 // MARK: - Private
