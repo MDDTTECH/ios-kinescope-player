@@ -21,7 +21,7 @@ final class EnterViewController: UIViewController {
 #if targetEnvironment(simulator)
         "9L8KmbNuhQSxQofn5DR4Vg"
 #else
-        "b6a0ce69-3135-496d-8064-c8ed51ac4b2e"
+        "bmUsXQAgvvgMEkFiNTrAm3"
 #endif
     }()
 

@@ -98,15 +98,51 @@ extension KinescopeFullscreenViewController {
                         video: KinescopeVideo,
                         with playerViewConfig: KinescopePlayerViewConfiguration,
                         and completion: @escaping () -> Void) {
+        
         KinescopeFullscreenConfiguration.preferred(for: video) { configuration in
-            let playerVC = KinescopeFullscreenViewController(player: player,
-                                                             config: configuration, 
-                                                             playerViewConfig: playerViewConfig)
+
+            let safeConfig: KinescopeFullscreenConfiguration = {
+                if isOrientationSupported(configuration.orientationMask) {
+                    return configuration
+                }
+
+                if isOrientationSupported(.portrait) {
+                    return .portrait
+                } else if isOrientationSupported(.landscape) {
+                    return .landscape
+                } else {
+                    return configuration // как fallback (редкий случай)
+                }
+            }()
+
+            let playerVC = KinescopeFullscreenViewController(
+                player: player,
+                config: safeConfig,
+                playerViewConfig: playerViewConfig
+            )
+
             playerVC.modalPresentationStyle = .overFullScreen
             playerVC.modalTransitionStyle = .crossDissolve
             playerVC.modalPresentationCapturesStatusBarAppearance = true
+
             rootVC?.present(playerVC, animated: true, completion: completion)
         }
+    }
+    
+    private static func isOrientationSupported(_ mask: UIInterfaceOrientationMask) -> Bool {
+        guard let rootVC = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController else {
+            return true
+        }
+
+        var vc: UIViewController? = rootVC
+        var combinedMask: UIInterfaceOrientationMask = []
+
+        while let current = vc {
+            combinedMask.formUnion(current.supportedInterfaceOrientations)
+            vc = current.presentedViewController
+        }
+
+        return !combinedMask.intersection(mask).isEmpty
     }
 }
 
