@@ -130,19 +130,13 @@ extension KinescopeFullscreenViewController {
     }
     
     private static func isOrientationSupported(_ mask: UIInterfaceOrientationMask) -> Bool {
-        guard let rootVC = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController else {
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
             return true
         }
 
-        var vc: UIViewController? = rootVC
-        var combinedMask: UIInterfaceOrientationMask = []
+        let appSupported = UIApplication.shared.supportedInterfaceOrientations(for: window)
 
-        while let current = vc {
-            combinedMask.formUnion(current.supportedInterfaceOrientations)
-            vc = current.presentedViewController
-        }
-
-        return !combinedMask.intersection(mask).isEmpty
+        return !appSupported.intersection(mask).isEmpty
     }
 }
 
