@@ -433,6 +433,8 @@ private extension KinescopeVideoPlayer {
     }
 
     @objc func appWillEnterForeground() {
+        guard self.view != nil else { return }
+        guard view?.playerView.player == nil else { return }
         if !(view?.pipController?.isPictureInPictureActive ?? false) {
             view?.playerView.player = strategy.player
         }
