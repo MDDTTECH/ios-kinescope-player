@@ -47,6 +47,7 @@ protocol ActionOwner {
 protocol Repeater: AnyObject {
     func start() -> RepeaterState
     func reset()
+    func cancel()
 }
 
 final class DefaultRepeater: Repeater, ActionOwner {
@@ -98,6 +99,11 @@ final class DefaultRepeater: Repeater, ActionOwner {
 
     func reset() {
         attempts = 0
+    }
+    
+    func cancel() {
+        workItem?.cancel()
+        workItem = nil
     }
 
 }

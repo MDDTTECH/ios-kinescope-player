@@ -238,7 +238,7 @@ public class KinescopeVideoPlayer: KinescopePlayer, KinescopePlayerBody, Fullscr
         if let view = view {
             detach(view: view)
         }
-        
+
         strategy.player.replaceCurrentItem(with: nil)
 
         if let observer = playbackObserver {
@@ -249,8 +249,10 @@ public class KinescopeVideoPlayer: KinescopePlayer, KinescopePlayerBody, Fullscr
         kvoBag.removeAll()
         notificationsBag.removeAll()
 
-        self.view = nil
+        $playRepeater.cancel()
+        playRepeater = nil
 
+        self.view = nil
         delegate = nil
     }
 }
