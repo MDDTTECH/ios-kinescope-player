@@ -101,23 +101,10 @@ extension KinescopeFullscreenViewController {
         
         KinescopeFullscreenConfiguration.preferred(for: video) { configuration in
 
-            let safeConfig: KinescopeFullscreenConfiguration = {
-                if isOrientationSupported(configuration.orientationMask) {
-                    return configuration
-                }
-
-                if isOrientationSupported(.portrait) {
-                    return .portrait
-                } else if isOrientationSupported(.landscape) {
-                    return .landscape
-                } else {
-                    return configuration // как fallback (редкий случай)
-                }
-            }()
-
+            // Force landscape video mode
             let playerVC = KinescopeFullscreenViewController(
                 player: player,
-                config: safeConfig,
+                config: .landscape,
                 playerViewConfig: playerViewConfig
             )
 
@@ -127,16 +114,6 @@ extension KinescopeFullscreenViewController {
 
             rootVC?.present(playerVC, animated: true, completion: completion)
         }
-    }
-    
-    private static func isOrientationSupported(_ mask: UIInterfaceOrientationMask) -> Bool {
-        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
-            return true
-        }
-
-        let appSupported = UIApplication.shared.supportedInterfaceOrientations(for: window)
-
-        return !appSupported.intersection(mask).isEmpty
     }
 }
 
