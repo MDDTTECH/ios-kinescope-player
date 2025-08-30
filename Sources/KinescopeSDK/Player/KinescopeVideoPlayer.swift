@@ -16,6 +16,10 @@ public class KinescopeVideoPlayer: KinescopePlayer, KinescopePlayerBody, Fullscr
             view?.pipController?.delegate = pipDelegate
         }
     }
+    
+    public var isMuted: Bool {
+        strategy.player.volume.isZero
+    }
 
     // MARK: - Private Properties
     
@@ -166,6 +170,14 @@ public class KinescopeVideoPlayer: KinescopePlayer, KinescopePlayerBody, Fullscr
         self.strategy.pause()
         self.strategy.unbind()
         self.delegate?.playerDidStop()
+    }
+    
+    public func toggleMute() {
+        strategy.player.volume = isMuted ? 1 : 0
+    }
+    
+    public func setVolume(newValue: Float) {
+        strategy.player.volume = newValue
     }
 
     public func attach(view: KinescopePlayerView) {
