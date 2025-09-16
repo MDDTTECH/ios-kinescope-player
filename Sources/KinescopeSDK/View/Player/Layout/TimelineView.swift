@@ -169,7 +169,12 @@ private extension TimelineView {
 
     func updateFrames(with circleX: CGFloat) {
 
-        let normalizedX = getNormalisedCoordinate(from: circleX)
+        var normalizedX = getNormalisedCoordinate(from: circleX)
+        
+        // Workaraound for NaN crash
+        if normalizedX.isNaN {
+            normalizedX = frame.width / 2
+        }
 
         let centerY = frame.height / 2
 
