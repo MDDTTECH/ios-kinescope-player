@@ -16,8 +16,8 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/M3U8Kit/M3U8Parser.git", from: "1.1.0"),
-        .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.26.0")
+        .package(url: "https://github.com/M3U8Kit/M3U8Parser.git", .exactItem("1.1.0")),
+        .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.33.3")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
