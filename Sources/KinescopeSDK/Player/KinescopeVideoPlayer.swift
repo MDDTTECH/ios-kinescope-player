@@ -195,6 +195,7 @@ public class KinescopeVideoPlayer: KinescopePlayer, KinescopePlayerBody, Fullscr
         }
         view.set(options: options)
         view.pipController?.delegate = pipDelegate
+        syncAttachedViewState()
         updateTimeline()
         updateLiveIndicator()
         observePlaybackTime()
@@ -498,6 +499,22 @@ private extension KinescopeVideoPlayer {
         isPlaying ? play() : pause()
     }
 
+    func syncAttachedViewState() {
+        guard let view else {
+            return
+        }
+
+        if let video {
+            view.overlay?.set(title: video.title, subtitle: video.description)
+        }
+
+        if strategy.player.isReadyToPlay {
+            view.stopLoader(withPreview: true)
+        }
+
+        view.change(timeControlStatus: strategy.player.timeControlStatus)
+    }
+
     func updateTimeline() {
         cachedDuration = strategy.player.durationSeconds ?? .zero
 
@@ -635,13 +652,16 @@ extension KinescopeVideoPlayer: KinescopePlayerViewDelegate {
             KinescopeFullscreenViewController.present(player: self,
                                                       video: video,
                                                       with: view.config) { [weak self] in
-                guard let self else {
+                guard let self,
+                      let video = self.video
+                else {
                     return
                 }
 
-                view.overlay?.set(title: video.title, subtitle: video.description)
-                view.stopLoader(withPreview: strategy.player.isReadyToPlay)
-                restoreView()
+                self.view?.overlay?.set(title: video.title, subtitle: video.description)
+                self.view?.stopLoader(withPreview: self.strategy.player.isReadyToPlay)
+                self.view?.change(timeControlStatus: self.strategy.player.timeControlStatus)
+                self.restoreView()
             }
         }
     }
